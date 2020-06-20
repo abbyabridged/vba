@@ -29,8 +29,7 @@ ws.Activate
         Dim SummaryHeaders As Variant
         SummaryHeaders = Array("Ticker", "Yearly Change", "Yearly Percentage Change", "Total Stock Volume")
         Range("I1:L1") = SummaryHeaders
-        
-    
+            
         'Loop through each stock entry
         
         For I = 2 To lastrow
@@ -65,12 +64,12 @@ ws.Activate
                 'Set variable for percentage change
                 Dim PercentChange As Double
                 
-                        'In instances where the opening and closing price are the same, Excel runs into an error as zero cannot  be divded.
+                        'In instances where the opening and closing price are the same, Excel runs into an error as zero is not divisible.
                         'Use an if statement to set percentage change to 0 in these instances
                             If (ClosePrice - OpenPrice) = 0 Then
                             PercentageChange = 0
                             
-                        'In instances where the opening price is zero, percentage change cannot be calculated
+                        'In instances where the opening price is zero, percentage change cannot be calculated.
                         'Use an if statement to set percentage change to "N/A"
                             ElseIf OpenPrice = 0 Then
                             PercentageChange = "N/A"
@@ -154,7 +153,6 @@ Range("Q2").Value = Format(MaxPercentInc, "Percent")
 MaxPercentIncTicker = WorksheetFunction.Index(Range("I:I"), WorksheetFunction.Match(Cells(2, 17).Value, Range("K:K"), 0))
 Range("P2").Value = MaxPercentIncTicker
 
-
 'Use VBA Min function to find stock with greatest percentage decrease and corresponding ticker symbol
 'Print ticker symbol in cell P3
 'Print percentage decrease in Q3 formatted as a percentage
@@ -167,8 +165,8 @@ Range("P3").Value = MaxPercentDecTicker
 
             '---------
             
-            'It occurred to me that the lowest value in this column could be positive, which means there is no percentage decrease.
-            'If value found by Min function is positive, then there is no percentage decrease, so print "Not available"
+            'The lowest value in this column could be positive, which means there is no percentage decrease.
+            'If value found by Min function is positive, then there is no percentage decrease, so print "No decreases"
                 If MaxPercentDec >= 0 Then
                 Range("Q3").Value = "No decreases"
                 Range("P3").Value = "No decreases"
